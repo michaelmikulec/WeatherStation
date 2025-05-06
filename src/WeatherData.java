@@ -1,27 +1,26 @@
-public class WeatherData implements Subject {
-  private ArrayList observers;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.List;
+import java.util.ArrayList;
+
+public class WeatherData extends Observable {
   private float temperature;
   private float humidity;
   private float pressure;
   public WeatherData() {
-    observers = new ArrayList();
+
   }
-  public void registerObserver(Observer o) {
-    observers.add(o);
+  public float gettemperature() {
+    return temperature;
   }
-  public void removeObserver(Observer o) {
-    int i = observers.indexOf(o);
-    if (i >= 0) {
-      observers.remove(i);
-    }
+  public float gethumidity() {
+    return humidity;
   }
-  public void notifyObservers() {
-    for (int i = 0; i < observers.size(); i++) {
-      Observer observer = (Observer) observers.get(i);
-      observer.update(temperature, humidity, pressure);
-    }
+  public float getpressure() {
+    return pressure;
   }
   public void measurementsChanged() {
+    setChanged();
     notifyObservers();
   }
   public void setMeasurements(float temperature, float humidity, float pressure) {
